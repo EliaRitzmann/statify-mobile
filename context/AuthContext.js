@@ -27,7 +27,6 @@ export function UserAuthContextProvider({ children }) {
   };
 
   const login = () => {
-    console.log("press")
     promptAsync()
   }
 
