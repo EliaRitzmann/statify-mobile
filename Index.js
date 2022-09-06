@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import TopTracks from './screens/TopTracks'
 
 const Index = () => {
-    const {accessToken} = useAuth()
+    const { accessToken } = useAuth()
     const Tab = createBottomTabNavigator()
 
     if(accessToken){

@@ -1,13 +1,15 @@
 import { SafeAreaView, StyleSheet, Text, View, Button } from 'react-native'
 import React from 'react'
 import { useAuth } from '../context/AuthContext'
+import { StorageTestButton } from '../components/StorageTestButton'
 
 const Home = () => {
-    const {accessToken, logOut} = useAuth()
+    const { accessToken, logOut} = useAuth()
   return (
     <SafeAreaView>
       <Text>Home</Text>
-      <Text>Token: {accessToken}</Text>
+      <Text>accessToken: {accessToken}</Text>
+      <StorageTestButton></StorageTestButton>
       <Button title="logOut" onPress={() => logOut()}></Button>
     </SafeAreaView>
   )

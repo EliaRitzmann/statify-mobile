@@ -28,8 +28,6 @@ const TopTracks = () => {
   //   }
   // }, [topTracks]);
 
-  console.log(topTracks)
-
   const renderItem = ({ item }) => <Element data={item}></Element>;
 
   return (
