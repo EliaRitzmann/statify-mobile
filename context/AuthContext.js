@@ -33,15 +33,33 @@ export function UserAuthContextProvider({ children }) {
   };
 
 
+  AsyncStorage.getItem("refreshToken")
+    .then((data) => {
+      if (data != null) {
+        setRefreshToken(data);
+      }
+  })
+
+
+  useEffect(() => {
+    if (refreshToken != null) {
+      refreshAccessToken();
+    }
+  }, [refreshToken]);
+
+
   const login = () => {
-    promptAsync()
+    promptAsync();
   }
 
 
   const logOut = () => {
-    setAccessToken(null);
     setRefreshToken(null);
+    AsyncStorage.removeItem("refreshToken");
     setExpiresAt(null);
+    AsyncStorage.removeItem("expiresAt");
+    setAccessToken(null);
+    AsyncStorage.removeItem("accessToken");
   }
 
 
@@ -91,47 +109,24 @@ export function UserAuthContextProvider({ children }) {
       setRefreshToken(res.refreshToken);
       AsyncStorage.setItem("refreshToken", res.refreshToken);
       var now = new Date();
-      const millis = (now.valueOf()+(res.expiresIn*1000)+(res.expiresIn*1000)).toString();
-      AsyncStorage.setItem("expiresAt", millis);
-      setExpiresAt("expiresAt", millis);
+      var expiryTime = (now.valueOf()+(res.expiresIn*1000)).toString();
+      AsyncStorage.setItem("expiresAt", expiryTime);
+      setExpiresAt("expiresAt", expiryTime);
     })
   }
 
-
-  const setStoredRefreshToken = async () => {
-    await AsyncStorage.getItem("refreshToken")
-    .then(refresh => setRefreshToken(refresh))
-  };
-
-
-  const setStoredExpiresAt = async () => {
-    await AsyncStorage.getItem("expiresAt")
-    .then(expiresAt => setExpiresAt(expiresAt))
-  };
-
-  const setStoredAccessToken = async () => {
-    await AsyncStorage.getItem("accessToken")
-    .then(accessToken => setAccessToken(accessToken))
-  };
-
-
-
-  setStoredRefreshToken();
-  setStoredExpiresAt();
-  setStoredAccessToken();
-
-
-  useEffect(() => {
-    if (refreshToken != null) {
-      var date = new Date();
-      if (date.valueOf() > parseInt(expiresAt))
-        refreshAccessToken();
-    }
-  }, [refreshToken])
-
   
   const refreshAccessToken = () => {
-    console.log(refreshToken);
+    const isExpired = AsyncStorage.getItem("expiresAt")
+    .then(expiryTime => {
+      let now = new Date();
+      if (now.valueOf() < parseInt(expiryTime)) {
+        return false;
+      } else return true;
+    })
+    .catch((err) => console.log(err))  
+
+
     const refreshConfig = new RefreshTokenRequest({
       clientId: getClientID(),
       refreshToken: refreshToken,
@@ -142,16 +137,25 @@ export function UserAuthContextProvider({ children }) {
       }
     })
 
-    refreshAsync(refreshConfig, { tokenEndpoint: discovery.tokenEndpoint })
-    .then(res => {
-      console.log(res);
-      setAccessToken(res.accessToken);
-      AsyncStorage.setItem("accessToken", res.accessToken);
-      var date = new Date();
-      setExpiresAt(date.valueOf()+(res.expiresIn*1000));
-      AsyncStorage.setItem("expiresAt", (date.valueOf()+(res.expiresIn*1000)).toString())
+
+    isExpired.then(isExpired => {
+      if (isExpired) {
+        console.log("refreshing...")
+        refreshAsync(refreshConfig, { tokenEndpoint: discovery.tokenEndpoint })
+        .then(res => {
+          AsyncStorage.setItem("accessToken", res.accessToken);
+          setAccessToken(res.accessToken);
+          let now = new Date();
+          setExpiresAt(now.valueOf()+(res.expiresIn*1000));
+          AsyncStorage.setItem("expiresAt", (now.valueOf()+(res.expiresIn*1000)).toString());
+        })
+        .catch(err => console.log(err))
+      } else {
+        AsyncStorage.getItem("accessToken").then(accessTk => {
+          setAccessToken(accessTk);
+        })
+      }
     })
-    .catch(err => console.log(err))
   }
 
 
