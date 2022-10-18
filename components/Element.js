@@ -1,17 +1,30 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Image, Linking, StyleSheet, Text, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native'
+import React, { useCallback } from 'react'
 
-const Element = ({data}) => {
+const Element = ({header, description, image, id, link}) => {
+
+    const openSpotify = () => {
+        Linking.canOpenURL(link).then(supported => {
+            if (supported) {
+              Linking.openURL(link);
+            } else {
+              console.log("Don't know how to open URI: " + link);
+            }
+          });
+    }
+
   return (
-    <View style={styles.container}>
-        <Text >{data.elementId}</Text>
-        <Image source={{uri: data.album.images[0].url}} style={styles.image} ></Image>
+    <TouchableNativeFeedback onPress={openSpotify}>
+        <View style={styles.container} >
+        <Image source={{uri: image}} style={styles.image} ></Image>
         <View>
-            <Text style={styles.title}>{data.album.name}</Text>
-            <Text style={styles.artist}>{data.artists[0].name}</Text>
+        <Text style={{fontSize: 12, marginLeft: 10}}>{id}#</Text>
+            <Text style={styles.title}>{header}</Text>
+            <Text style={styles.artist}>{description}</Text>
         </View>
-      
-    </View>
+        </View>
+        
+    </TouchableNativeFeedback>
   )
 }
 
@@ -22,20 +35,18 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "white",
         margin: 10,
-        borderRadius: 20,
         height: 100,
         alignItems: "center",
+        padding: 10
     },
     image: {
-        height: 100,
-        width: 100,
-        borderBottomLeftRadius: 20,
-        borderTopLeftRadius: 20,
+        height: 90,
+        width: 90,
         
     },
     title: {
         fontSize: 30,
-        marginBottom: 10,
+        marginBottom: 1,
         marginLeft: 10
     },
     artist: {

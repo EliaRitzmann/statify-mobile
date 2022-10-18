@@ -68,7 +68,7 @@ export function UserAuthContextProvider({ children }) {
       clientId: getClientID(),
       usePKCE: true,
       responseType: ResponseType.code,
-      scopes: ["user-read-email", "user-top-read"],
+      scopes: ["user-read-email", "user-top-read", "user-read-private", "user-read-email", "user-read-recently-played"],
       codeChallengeMethod: CodeChallengeMethod.S256,
       redirectUri: makeRedirectUri({
         scheme: "react-native-oauth2",
@@ -91,7 +91,7 @@ export function UserAuthContextProvider({ children }) {
       clientId: getClientID(),
       code: code,
       grantType: GrantType.AuthorizationCode,
-      scopes: ["user-read-email", "user-top-read"],
+      scopes: ["user-read-email", "user-top-read", "user-read-private", "user-read-email", "user-read-recently-played"],
       extraParams: {
         code_verifier: request.codeVerifier,
       },
@@ -131,7 +131,7 @@ export function UserAuthContextProvider({ children }) {
       clientId: getClientID(),
       refreshToken: refreshToken,
       grantType: GrantType.RefreshToken,
-      scopes: ["user-read-email", "user-top-read"],
+      scopes: ["user-read-email", "user-top-read", "user-read-private", "user-read-email" ,"user-read-recently-played"],
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }
