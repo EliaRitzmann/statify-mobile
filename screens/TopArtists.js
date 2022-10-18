@@ -17,7 +17,7 @@ const TopArtists = () => {
 
   const renderItem = ({ item, index }) => 
   <Element 
-  id={index + 1} 
+  id={index + 1 + "#"} 
   header={item.name} 
   description={"Popularity: " + item.popularity} 
   image={item.images[0].url}

@@ -20,7 +20,7 @@ const TopTracks = () => {
 
   const renderItem = ({ item, index }) => 
   <Element 
-  id={index + 1 } 
+  id={index + 1 + "#"} 
   header={item.album.name} 
   description={item.artists[0].name} 
   image={item.album.images[0].url}

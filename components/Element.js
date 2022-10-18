@@ -18,7 +18,7 @@ const Element = ({header, description, image, id, link}) => {
         <View style={styles.container} >
         <Image source={{uri: image}} style={styles.image} ></Image>
         <View>
-        <Text style={{fontSize: 12, marginLeft: 10}}>{id}#</Text>
+        <Text style={{fontSize: 12, marginLeft: 10}}>{id}</Text>
             <Text style={styles.title}>{header}</Text>
             <Text style={styles.artist}>{description}</Text>
         </View>
