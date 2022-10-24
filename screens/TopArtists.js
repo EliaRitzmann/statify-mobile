@@ -11,7 +11,6 @@ const TopArtists = () => {
   useEffect(() => {
     fetchTopArtists(accessToken, "medium_term").then(data => {
       setTopTracks(data.items)
-      console.log(data.items)
     })
   }, [])
 

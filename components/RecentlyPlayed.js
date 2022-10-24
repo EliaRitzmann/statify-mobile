@@ -54,7 +54,6 @@ const RecentlyPlayed = () => {
   
     return (
       <View style={{backgroundColor: "white"}}>
-        <Text>Recently Played</Text>
         <FlatList data={topTracks} renderItem={renderItem} keyExtractor={(item, index) => index}>
         </FlatList>
       </View>

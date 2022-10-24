@@ -8,6 +8,7 @@ import TopTracks from "./screens/TopTracks";
 import TopArtists from "./screens/TopArtists";
 
 import {Ionicons, Entypo, FontAwesome5  } from "@expo/vector-icons";
+import { StatusBar } from "react-native";
 
 const Index = () => {
   const { accessToken } = useAuth();

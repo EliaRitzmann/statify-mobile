@@ -2,6 +2,7 @@ export function getClientID() {
   return "357c3bd6acae401e8fc36b2a1c0d7521";
 }
 
+
 export function fetchMe(accessToken) {
   return fetch("https://api.spotify.com/v1/me", {
     method: "GET",
@@ -22,6 +23,9 @@ export function fetchMe(accessToken) {
       })
   );
 }
+
+
+
 export function fetchRecentlyPlayed(accessToken) {
   return fetch("https://api.spotify.com/v1/me/player/recently-played", {
     method: "GET",
