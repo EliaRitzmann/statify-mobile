@@ -6,9 +6,7 @@ import Home from "./screens/Home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TopTracks from "./screens/TopTracks";
 import TopArtists from "./screens/TopArtists";
-
-import {Ionicons, Entypo, FontAwesome5  } from "@expo/vector-icons";
-import { StatusBar } from "react-native";
+import { Ionicons, Entypo, FontAwesome5 } from "@expo/vector-icons";
 
 const Index = () => {
   const { accessToken } = useAuth();
@@ -26,17 +24,16 @@ const Index = () => {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" color={color} size={size} />
             ),
-            
           }}
         ></Tab.Screen>
         <Tab.Screen
           name="TopTracks"
           component={TopTracks}
           options={{
-            title: 'Your top Tracks',
+            title: "Your top Tracks",
             tabBarLabel: "Top Tracks",
             tabBarIcon: ({ color, size }) => (
-                <Entypo name="folder-music" color={color} size={size} />
+              <Entypo name="folder-music" color={color} size={size} />
             ),
           }}
         ></Tab.Screen>
@@ -44,10 +41,10 @@ const Index = () => {
           name="TopArtists"
           component={TopArtists}
           options={{
-            title: 'Your top Artists',
+            title: "Your top Artists",
             tabBarLabel: "Top Artists",
             tabBarIcon: ({ color, size }) => (
-                <FontAwesome5 name="guitar" color={color} size={size} />
+              <FontAwesome5 name="guitar" color={color} size={size} />
             ),
           }}
         ></Tab.Screen>

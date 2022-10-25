@@ -1,18 +1,18 @@
-import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { useAuth } from '../context/AuthContext'
+import { Button, SafeAreaView, StyleSheet, Text } from "react-native";
+import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 const AuthScreen = () => {
-    const {login} = useAuth()
+  const { login } = useAuth();
 
   return (
     <SafeAreaView>
       <Text>AuthScreen</Text>
-      <Button title='Login' onPress={login}></Button>
+      <Button title="Login" onPress={login}></Button>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default AuthScreen
+export default AuthScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

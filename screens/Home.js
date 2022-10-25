@@ -1,11 +1,4 @@
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  FlatList,
-} from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
 import RecentlyPlayed from "../components/RecentlyPlayed";
 
@@ -14,12 +7,15 @@ import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 
 const Home = () => {
-
   const Stack = createNativeStackNavigator();
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}></Stack.Screen>
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
       <Stack.Screen name="Profile" component={Profile}></Stack.Screen>
       <Stack.Screen
         name="RecentlyPlayed"
@@ -28,16 +24,6 @@ const Home = () => {
     </Stack.Navigator>
   );
 };
-
-{
-  /*
-<SafeAreaView>
-      <Text>Home</Text>
-      <Text>Token: {accessToken}</Text>
-      <Button title="logOut" onPress={() => logOut()}></Button>
-    </SafeAreaView>
-*/
-}
 
 export default Home;
 
