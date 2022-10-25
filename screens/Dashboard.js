@@ -26,7 +26,7 @@ const Dashboard = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={{ marginTop: 50 }}>Hey {user.display_name}</Text>
-      <Text>Have a grat day</Text>
+      <Text>Have a great day!</Text>
 
       <View style={styles.profile}>
         <View style={styles.navbar}>
