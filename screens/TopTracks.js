@@ -9,6 +9,8 @@ const TopTracks = () => {
   const { accessToken } = useAuth();
   const [topTracks, setTopTracks] = useState([]);
 
+  console.log(topTracks)
+
   useEffect(() => {
     fetchTopTracks(accessToken, "medium_term").then((data) => {
       setTopTracks(data.items);
@@ -18,7 +20,7 @@ const TopTracks = () => {
   const renderItem = ({ item, index }) => (
     <Element
       id={index + 1 + "#"}
-      header={item.album.name}
+      header={item.name}
       description={item.artists[0].name}
       image={item.album.images[0].url}
       link={item.external_urls.spotify}
