@@ -24,7 +24,7 @@ export function fetchMe(accessToken) {
 }
 
 export function fetchRecentlyPlayed(accessToken) {
-  return fetch("https://api.spotify.com/v1/me/player/recently-played", {
+  return fetch("https://api.spotify.com/v1/me/player/recently-played?limit=50", {
     method: "GET",
 
     headers: {
