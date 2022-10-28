@@ -14,13 +14,13 @@ const Home = () => {
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
-        options={{ headerShown: false }}
-      ></Stack.Screen>
-      <Stack.Screen name="Profile" component={Profile}></Stack.Screen>
-      <Stack.Screen
-        name="RecentlyPlayed"
-        component={RecentlyPlayed}
-      ></Stack.Screen>
+        options={{ headerShown: false }} />
+      <Stack.Screen 
+        name="Profile" 
+        component={Profile} />
+      <Stack.Screen 
+        name="RecentlyPlayed" 
+        component={RecentlyPlayed} />
     </Stack.Navigator>
   );
 };
